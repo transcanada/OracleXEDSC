@@ -183,15 +183,8 @@ function Expand-ZipFile
         [string]$file, 
         [string]$destination
     )    
-    $files = (Get-ChildItem $file).FullName
-    $shell = new-object -com shell.application
-    $files | %{
-        $zip = $shell.NameSpace($_)
-
-        foreach ($item in $zip.items()) {
-           $shell.Namespace($destination).copyhere($item)
-        }
-    }
+    Add-Type -assembly "system.io.compression.filesystem"
+    [io.compression.zipfile]::ExtractToDirectory($file, $destination)
 }
   
 function Install-OracleXE 
