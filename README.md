@@ -1,4 +1,4 @@
-This repository contains a PowerShell module with a DSC resource that can be used to install the Oracle XE.
+This repository contains a PowerShell module with a DSC resource that can be used to install Oracle XE.
 
 ## Sample
 
@@ -43,7 +43,7 @@ When `Ensure` is set to `Present`, the resource will:
  2. Configure Oracle XE install with desired system account password
  3. Install Oracle XE 
 
-When `Ensure` is set to `Absent`, the resource will throw an error as uninstall or Oracle XE is not supported by module yet.
+When `Ensure` is set to `Absent`, the resource will throw an error as uninstall of Oracle XE is not supported by module yet.
 
 When `State` is `Started`, the resource will ensure that the Oracle XE windows services 'OracleServiceXE' and 'OracleXETNSListener' are running. When `Stopped`, it will ensure all Oracle XE services are stopped.
 
