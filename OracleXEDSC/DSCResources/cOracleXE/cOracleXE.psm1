@@ -217,17 +217,10 @@ function Install-OracleXE
     Expand-ZipFile $installZipPath $installTempPath
     Write-Verbose "Expanded Oracle XE installation zip to directory $installTempPath"
         
-	# token replace oracle username and password
     Write-Verbose "Configuring Oracle XE with system password before installation."
     (cat "$($installTempPath)\DISK1\response\OracleXE-install.iss") -replace 'SYSPassword=oraclexe', "SYSPassword=$OracleSystemPassword" > $oracleInstallFile    
     
     Write-Verbose "Starting install of Oracle XE."
-    $installExitCode = (Start-Process -FilePath $installExecutable -ArgumentList $installArguments -Wait -Passthru).ExitCode
-    Write-Verbose "Finished install of Oracle XE."
-    
-    Write-Verbose "Oracle XE installer returned exit code $installExitCode"
-    if ($installExitCode -ne 0) 
-    {
-        throw "Installation of Oracle XE failed; exited with code: $installExitCode. View the log at $installLogFile"
-    }     
+    Start-Process -FilePath $installExecutable -ArgumentList $installArguments -Wait -Passthru
+    Write-Verbose "Finished install of Oracle XE."        
 }
